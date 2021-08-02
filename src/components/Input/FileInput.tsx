@@ -44,11 +44,7 @@ export interface FileInputProps {
   trigger: UseFormTrigger<FieldValues>;
 }
 
-const FileInputBase: ForwardRefRenderFunction<
-  HTMLInputElement,
-  FileInputProps
-> = (
-  {
+const FileInputBase: ForwardRefRenderFunction<HTMLInputElement, FileInputProps> = ({
     name,
     error = null,
     setImageUrl,
@@ -58,15 +54,11 @@ const FileInputBase: ForwardRefRenderFunction<
     onChange,
     trigger,
     ...rest
-  },
-  ref
-) => {
+  }, ref) => {
   const toast = useToast();
   const [progress, setProgress] = useState(0);
   const [isSending, setIsSending] = useState(false);
-  const [cancelToken, setCancelToken] = useState<CancelTokenSource>(
-    {} as CancelTokenSource
-  );
+  const [cancelToken, setCancelToken] = useState<CancelTokenSource>({} as CancelTokenSource);
 
   const handleImageUpload = useCallback(
     async (event: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
@@ -122,9 +114,9 @@ const FileInputBase: ForwardRefRenderFunction<
         setIsSending(false);
         setProgress(0);
       }
-    },
-    [onChange, setError, setImageUrl, setLocalImageUrl, trigger, toast]
-  );
+    }, [
+      // onChange, 
+      setError, setImageUrl, setLocalImageUrl, trigger, toast]);
 
   useEffect(() => {
     if (error?.message && isSending && cancelToken?.cancel) {
